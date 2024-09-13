@@ -1,0 +1,41 @@
+data:
+  data_dir: /path/to/Dataset222_AutoPETIII_2024
+  splits_file: /path/to/Dataset222_AutoPETIII_2024/splits_final.json
+  fold: 1
+  target_shape: [ 128, 160, 112 ]
+  batch_size: 2
+  suffix: .nii.gz
+  num_workers_train: 12
+  num_workers_val: 12
+
+  do_misalign: true
+  max_rotation_sag_cor_ax: [ 5, 5, 5 ]
+  rad_or_deg: deg
+  prob_rot: 0.1
+  max_shiftXYZ: [ 2, 2, 0 ]
+  prob_shift: 0.1
+  
+  do_random_other_transforms: true
+  transforms_name: custom_v1
+
+logger:
+  experiment: /path/to/challenge2024_autopet3
+  name: "baseline_${data.transforms_name}_misalign=${data.do_misalign}"
+
+model:
+  pretrained: false
+  resume: false
+  ckpt_path:
+  lr: 0.001
+  sw_batch_size: 4
+  seed: 42
+
+trainer:
+  max_steps: 250000
+  check_val_every_n_epoch: 5
+  precision: 16 #32, 16
+  accelerator: gpu
+  devices: 1
+  deterministic: true
+  strategy: auto
+  sync_batchnorm: true #false

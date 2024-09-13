@@ -1,0 +1,19 @@
+.idea/
+autopet3.egg-info/
+build/
+lightning_logs/
+test/
+predictions/
+
+*.npy
+*.pyc
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+*__pycache__*
+
+*.ckpt

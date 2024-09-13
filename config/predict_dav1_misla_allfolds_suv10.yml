@@ -1,0 +1,53 @@
+data:
+  data_dir: /path/to/Dataset222_AutoPETIII_2024
+  #data_dir_preprocessed: test/preprocessed
+  splits_file: /path/to/Dataset222_AutoPETIII_2024/splits_final.json
+  fold: [0, 1, 2, 3, 4]
+  #target_shape: [ 128, 160, 112 ]
+  #batch_size: 2
+  #suffix: .npz
+  #num_workers_train: 0
+  #num_workers_val: 0
+
+#logger:
+#  experiment: lightning_logs
+#  name: test_example2
+
+model:
+  # pretrained: true
+  # resume: false
+  ckpt_path:
+    -/path/to/lightning_logs/dav1_misal/version_0/checkpoints/last.ckpt
+    -/path/to/lightning_logs/dav1_misal/version_1/checkpoints/last.ckpt
+    -/path/to/lightning_logs/dav1_misal/version_2/checkpoints/last.ckpt
+    -/path/to/lightning_logs/dav1_misal/version_3/checkpoints/last.ckpt
+    -/path/to/lightning_logs/dav1_misal/version_4/checkpoints/last.ckpt
+  #lr: 0.001
+  #sw_batch_size: 6
+  #seed: 42
+
+clip_suv: 1.0
+
+body_fg_segmentator: false
+
+do_postprocess: false
+postprocess_kwargs:
+  min_size: 1
+  connectivity: 1
+  merge_distance: !!null
+  opening_radius: 2
+  closing_radius: 0
+  monai_remove_min_size: !!null
+
+# trainer:
+#   max_steps: 10
+#   check_val_every_n_epoch: 5
+#   #limit_val_batches: 0 #disable validation
+#   precision: 16 #32, 16
+#   accelerator: gpu
+#   devices: 1
+#   deterministic: true
+#   strategy: auto
+#   sync_batchnorm: true #false
+
+result_path:/path/to/lightning_logs/dav1_misal/

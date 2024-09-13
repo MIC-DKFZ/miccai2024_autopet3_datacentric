@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: autopet3
+Version: 0.0.1
+Author: Jakob Dexl
+Author-email: jakob.dexl@lmu.de
+License-File: LICENSE
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: nibabel
+Requires-Dist: SimpleITK
+Requires-Dist: tqdm
+Requires-Dist: imageio
+Requires-Dist: torch
+Requires-Dist: torchvision
+Requires-Dist: pytorch-lightning
+Requires-Dist: scikit-image
+Requires-Dist: tensorboard
+Requires-Dist: numba
+Requires-Dist: lovely_tensors
+Requires-Dist: omegaconf
+Requires-Dist: mlflow
+Requires-Dist: monai
+Requires-Dist: typer
+Requires-Dist: connected-components-3d
+Requires-Dist: blosc
+Provides-Extra: dev
+Requires-Dist: ruff; extra == "dev"

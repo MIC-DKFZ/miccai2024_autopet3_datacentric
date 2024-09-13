@@ -1,0 +1,43 @@
+[
+    {
+        "Summary": {
+            "dice_score": 0.6445277631506374,
+            "fp_volume": 1.3436236209869388,
+            "fn_volume": 5.805781078338623
+        }
+    },
+    {
+        "Summary FDG": null
+    },
+    {
+        "Summary PSMA": {
+            "dice_score": 0.6445277631506374,
+            "fp_volume": 1.3436236209869388,
+            "fn_volume": 5.805781078338623
+        }
+    },
+    {
+        "file_info": {
+            "ct": "test/data/imagesTr/psma_95b833d46f153cd2_2018-04-16_0000.nii.gz",
+            "pet": "test/data/imagesTr/psma_95b833d46f153cd2_2018-04-16_0001.nii.gz",
+            "label": "test/data/labelsTr/psma_95b833d46f153cd2_2018-04-16.nii.gz"
+        },
+        "metrics": {
+            "dice_score": 0.6412013958125623,
+            "fp_volume": 2.388664215087891,
+            "fn_volume": 11.611562156677246
+        }
+    },
+    {
+        "file_info": {
+            "ct": "test/data/imagesTr/psma_95b833d46f153cd2_2017-11-18_0000.nii.gz",
+            "pet": "test/data/imagesTr/psma_95b833d46f153cd2_2017-11-18_0001.nii.gz",
+            "label": "test/data/labelsTr/psma_95b833d46f153cd2_2017-11-18.nii.gz"
+        },
+        "metrics": {
+            "dice_score": 0.6478541304887124,
+            "fp_volume": 0.29858302688598637,
+            "fn_volume": 0.0
+        }
+    }
+]

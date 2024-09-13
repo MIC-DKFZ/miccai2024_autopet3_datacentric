@@ -1,0 +1,187 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autopet3"
+version = "0.0.1"
+dynamic = ["dependencies"]
+authors = [
+  { email = "jakob.dexl@lmu.de" },
+  { name = "Jakob Dexl"}
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["autopet3*"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.optional-dependencies]
+#notebook = jupyter>=1.0.0, matplotlib
+dev = ["ruff"]
+
+#    black==22.1.0
+#    flake8==4.0.1
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+src = ["src"] # this makes isort behave nicely
+line-length = 120
+
+# Same as Black.
+#line-length = 88
+indent-width = 4
+
+# Assume Python 3.8
+target-version = "py38"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+#select = ["E4", "E7", "E9", "F"]
+#ignore = []
+#from https://zivgitlab.uni-muenster.de/pymor/pymor/-/blob/main/pyproject.toml
+select = [
+  "F", # Pyflakes
+  "W", # pycodestyle warning
+  "E", # pycodestyle error
+  "I", # isort
+  "N", # pep8-naming
+  "D", # pydocstyle
+  "UP", # pyupgrade
+  "YTT", # flake8-2020
+  "ASYNC", # flake8-async
+  "B", # flake8-bugbear
+  "C4", # flake8-comprehensions
+  "DTZ", # flake8-datetimez
+  "EXE", # flake8-executable
+  "ISC", # flake8-implicit-str-concat
+  "ICN", # flake8-import-conventions
+  "PT", # flake8-pytest-style
+  "Q", # flake8-quotes
+  "RSE", # flake8-raise
+  "SIM", # flake8-simplify
+  "TD", # flake8-todos
+  "PGH", # pygrep-hooks
+  "RUF", # Ruff-specific rules
+]
+ignore = [
+  "B006", # do not use mutable data structures for argument defaults
+  "B007", # loop control variable not used within loop body
+  "B008", # do not perform function call in argument defaults
+  "B011", # do not `assert False`
+  "B017", # pytest.raises(Exception) should be considered evil
+  "B028", # no explicit `stacklevel` keyword argument found
+  "C408", # unnecessary collection (dict, list, tuple) call
+  "D100", # missing docstring in public module
+  "D101", # missing docstring in public class
+  "D102", # missing docstring in public method
+  "D103", # missing docstring in public function
+  "D104", # missing docstring in public package
+  "D105", # missing docstring in magic method
+  "D106", # missing docstring in public nested class
+  "D401", # first line of docstring should be in imperative mood
+  "D404", # first word of the docstring should not be "This"
+  "D405", # the linter thinks the argument name 'parameters' is a docstring section
+  "D407", # same as above
+  "D410", # same as above
+  "D411", # same as above
+  "D414", # same as above
+  "E402", # module level import not at top of file (due to config.require("PKG") syntax)
+  "E731", # do not assign a lambda expression, use a def
+  "E741", # do not use variables named 'l', 'O', or 'I'
+  "N802", # function name should be lowercase
+  "N803", # argument name should be lowercase (we use single capital letters everywhere for vectorarrays)
+  "N806", # same for variables in function
+  "PGH001", # no builtin eval allowed
+  "PT004", # fixture does not return anything, add leading underscore
+  "PT011", # pytest.raises(Exception) is too broad
+  "PT012", # pytest.raises() block should contain a single simple statement
+  "PT015", # assertion always fails, replace with `pytest.fail()`
+  "RUF005", # consider unpacking instead of concatenation
+  "SIM102", # use a single if statement instead of nested if statements
+  "SIM105", # use contextlib.suppress instead of try-except-pass
+  "SIM108", # use ternary operator instead of if-else-block
+  "SIM114", # combine if branches using logical or operator
+  "SIM116", # use a dictionary instead of consecutive `if` statements
+  "SIM300", # Yoda conditions
+  "TD002", # missing author in TODO
+  "TD003", # missing issue link on the line following this TODO
+]
+
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
+
+[tool.ruff.lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 5.
+max-complexity = 5
+
+[tool.tomlsort]
+trailing_comma_inline_array = true
+
+[tool.yamlfix]
+sequence_style = "block_style"

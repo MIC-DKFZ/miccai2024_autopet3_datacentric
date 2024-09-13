@@ -1,0 +1,62 @@
+[
+    {
+        "train": [
+            "fdg_3b1c9155f5_01-31-2003-NA-PET-CT Ganzkoerper  primaer mit KM-94971",
+            "psma_69ea0c011af2e2d4_2014-05-01",
+            "fdg_af547fa618_03-11-2006-NA-PET-CT Ganzkoerper  primaer mit KM-11358",
+            "fdg_2ce074c2ea_02-04-2006-NA-PET-CT Ganzkoerper  primaer mit KM-43376"
+        ],
+        "val": [
+            "psma_95b833d46f153cd2_2018-04-16",
+            "psma_95b833d46f153cd2_2017-11-18"
+        ]
+    },
+    {
+        "train": [
+            "psma_95b833d46f153cd2_2018-04-16",
+            "psma_95b833d46f153cd2_2017-11-18",
+            "fdg_3b1c9155f5_01-31-2003-NA-PET-CT Ganzkoerper  primaer mit KM-94971",
+            "psma_69ea0c011af2e2d4_2014-05-01",
+            "fdg_2ce074c2ea_02-04-2006-NA-PET-CT Ganzkoerper  primaer mit KM-43376"
+        ],
+        "val": [
+            "fdg_af547fa618_03-11-2006-NA-PET-CT Ganzkoerper  primaer mit KM-11358"
+        ]
+    },
+    {
+        "train": [
+            "psma_95b833d46f153cd2_2018-04-16",
+            "psma_95b833d46f153cd2_2017-11-18",
+            "fdg_3b1c9155f5_01-31-2003-NA-PET-CT Ganzkoerper  primaer mit KM-94971",
+            "fdg_af547fa618_03-11-2006-NA-PET-CT Ganzkoerper  primaer mit KM-11358",
+            "fdg_2ce074c2ea_02-04-2006-NA-PET-CT Ganzkoerper  primaer mit KM-43376"
+        ],
+        "val": [
+            "psma_69ea0c011af2e2d4_2014-05-01"
+        ]
+    },
+    {
+        "train": [
+            "psma_95b833d46f153cd2_2018-04-16",
+            "psma_95b833d46f153cd2_2017-11-18",
+            "psma_69ea0c011af2e2d4_2014-05-01",
+            "fdg_af547fa618_03-11-2006-NA-PET-CT Ganzkoerper  primaer mit KM-11358",
+            "fdg_2ce074c2ea_02-04-2006-NA-PET-CT Ganzkoerper  primaer mit KM-43376"
+        ],
+        "val": [
+            "fdg_3b1c9155f5_01-31-2003-NA-PET-CT Ganzkoerper  primaer mit KM-94971"
+        ]
+    },
+    {
+        "train": [
+            "psma_95b833d46f153cd2_2018-04-16",
+            "psma_95b833d46f153cd2_2017-11-18",
+            "fdg_3b1c9155f5_01-31-2003-NA-PET-CT Ganzkoerper  primaer mit KM-94971",
+            "psma_69ea0c011af2e2d4_2014-05-01",
+            "fdg_af547fa618_03-11-2006-NA-PET-CT Ganzkoerper  primaer mit KM-11358"
+        ],
+        "val": [
+            "fdg_2ce074c2ea_02-04-2006-NA-PET-CT Ganzkoerper  primaer mit KM-43376"
+        ]
+    }
+]
