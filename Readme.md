@@ -134,7 +134,7 @@ A preprocessing script can be used to clean the dataset, remove outlier or gener
 The predict function [predict.py](predict.py) integrates a postprocessing function. Test-time augmentation (TTA) was used to improve model performance. In addition, fewer random rotations were used to obtain a faster prediction time. We allow for ensembling even it's not strictly datacentric, but it can be considered best practice in a challenge setup. 
 There are a lot of post calibration techniques, etc, which we did not explicitly forbid. If any of these methods contribute more to the performance than your data methods please be fair and submit your method to award category 1 only.
 
-#### Citation
+## Citation
 
 This project builds upon and extends the work from the autoPET III Challenge: 
 
