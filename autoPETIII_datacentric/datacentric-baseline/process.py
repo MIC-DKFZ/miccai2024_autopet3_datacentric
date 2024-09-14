@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: Apache-2.0
+
 import glob
 import json
 import os
@@ -26,11 +29,11 @@ class Datacentric_baseline:  # SegmentationAlgorithm is not inherited in this cl
         self.ckpt_paths = glob.glob(os.path.join(self.weights_path, "*.ckpt"))
         self.tta = True #disable test-time augmentation in the process.py file by setting self.tta = False in the init function.
         self.sw_batch_size = 10 # default 12
-        self.random_flips = 2
+        self.random_flips = 5
         self.dynamic_tta = True
-        self.max_tta_time = 30 #220
+        self.max_tta_time = 42 #220
         self.dynamic_ensemble = True
-        self.max_ensemble_time = 175
+        self.max_ensemble_time = 210
 
         self.inferer = PredictModel(
             model_paths=self.ckpt_paths,
