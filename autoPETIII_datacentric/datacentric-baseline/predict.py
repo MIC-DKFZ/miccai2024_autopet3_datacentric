@@ -54,6 +54,9 @@ class PredictModel:
         max_tta_time: int = 300,
         dynamic_ensemble: bool = False,
         max_ensemble_time: int = 200,
+
+        max_prediction_time: int = 195,
+        TTAcutoff: int = 35
     ):
         """Initialize the class with the given parameters.
         Args:
@@ -65,6 +68,7 @@ class PredictModel:
                 max_tta_time (int, optional): Maximum TTA time. Defaults to 300.
                 dynamic_ensemble (bool, optional): Flag for dynamic ensemble. Defaults to False.
                 max_ensemble_time (int, optional): Maximum ensemble time. Defaults to 200.
+                max_prediction_time (int, optional): Maximum prediction time. Defaults to 290.
         Returns:
                 None
 
@@ -79,6 +83,9 @@ class PredictModel:
         self.random_flips = np.clip(random_flips, 0, len(self.tta_flips))
         self.dynamic_ensemble = dynamic_ensemble
         self.max_ensemble_time = max_ensemble_time
+        self.prediction_time = time.time()
+        self.max_prediction_time = max_prediction_time
+        self.TTAcutoff = TTAcutoff
 
     @staticmethod
     def preprocess(input: Dict[str, str]) -> torch.Tensor:
@@ -285,7 +292,12 @@ class PredictModel:
             n_ensembles = min(n_ensembles, len(self.ckpts))
             print(f"One ensemble pass takes {first_model_time} s. The time limit is {self.max_ensemble_time} s."
                   f" Using {n_ensembles} models for ensemble.")
+            if first_model_time > 45:
+                n_ensembles = 3
             for model in self.ckpts[1:n_ensembles]:
+                if time.time() - self.prediction_time > self.max_prediction_time:
+                    print(f"Time limit reached. Stopping ensemble after {len(predictions)} models. Time: {time.time() - self.prediction_time}")
+                    break
                 predictions.append(self.load_and_evaluate_model(model, input))           
         else:
             predictions = [
@@ -310,9 +322,9 @@ class PredictModel:
 
         """
         start_prediction = time.time()
+        tta_start_time = time.time()
         prediction = model.forward_logits(input)
         prediction_time = time.time() - start_prediction
-
         if self.dynamic_tta:
             max_time = self.max_tta_time - prediction_time
             random_flips = int(max_time // prediction_time)
@@ -331,13 +343,22 @@ class PredictModel:
                 flips_to_apply = random.sample(self.tta_flips, self.random_flips)
 
         # from tqdm import tqdm
+        flips_applied = 0
         for flip_idx in flips_to_apply:  # tqdm(flips_to_apply, desc="TTA"):
+            if time.time() - tta_start_time > self.TTAcutoff:
+                print(f"Time limit reached. Stopping TTA after {flips_applied} flips. Time: {time.time() - tta_start_time}")
+                break
+            if time.time() - self.prediction_time > 220:
+                print(f"Time limit reached. Stopping ensemble. Time: {time.time() - self.prediction_time}")
+                break
             start_tta = time.time()
             prediction += self.flip(
                 model.forward_logits(self.flip(input, flip_idx)), flip_idx
             )
+            flips_applied += 1
             print("TTA time: ", time.time() - start_tta, " TTA flip: ", flip_idx)
-        prediction /= len(flips_to_apply) + 1
+        #prediction /= len(flips_to_apply) + 1
+        prediction /= flips_applied + 1
         return prediction
 
     @staticmethod
@@ -352,7 +373,7 @@ class PredictModel:
         save_path: str = None,
         verbose: bool = False,
         do_postprocess: bool = False,
-        body_fg_segmentator: bool = False,
+        fake_total_segmentator: bool = False,
         clip_suv: bool = True,
         **postprocess_kwargs,
     ) -> Union[int, dict]:
@@ -364,7 +385,7 @@ class PredictModel:
                 save_path (str, optional): The path to save the output image. Defaults to None.
                 verbose (bool, optional): Whether to print the timings. Defaults to False.
                 do_postprocess (bool, optional): Whether to apply postprocessing. Defaults to False.
-                body_fg_segmentator (bool, optional): Whether to remove false positives outside body segmentation. Defaults to False.
+                fake_total_segmentator (bool, optional): Whether to remove false positives outside body segmentation. Defaults to False.
                 clip_suv (bool, optional): Whether to clip the SUV values. Defaults to False.
                 **postprocess_kwargs: Additional keyword arguments for postprocessing.
         Returns:
@@ -406,7 +427,7 @@ class PredictModel:
             prediction[0], reference[None, ...], mode="nearest"
         )
 
-        if body_fg_segmentator:
+        if fake_total_segmentator:
             start_body_segmentator = time.time()
             ct_reference = mt.LoadImage()(ct_file_path)
             anatomy = ct_reference
@@ -418,9 +439,15 @@ class PredictModel:
             anatomy = binary_dilation(anatomy, structure=ball(5))
 
             anatomy = torch.tensor(anatomy, dtype=output.dtype, device=output.device)
-
+            print(output[0].dtype
+            )
             output[0] *= anatomy
             body_segmentator_time = time.time() - start_body_segmentator
+            print(
+                f"One body segmentation takes {body_segmentator_time} s."
+            )
+            print(output[0].dtype
+            )
 
         if clip_suv:
             # clip segmentation values where the suv is smaller than 3
@@ -446,7 +473,7 @@ class PredictModel:
             print(f"Prediction time: {prediction_time} seconds")
             if do_postprocess:
                 print(f"Postprocessing time: {postprocessing_time} seconds")
-            if body_fg_segmentator:
+            if fake_total_segmentator:
                 print(f"Body segmentator time: {body_segmentator_time} seconds")
             print(f"Saving time: {saving_time} seconds")
             print(f"Total time: {total_time} seconds")
@@ -496,7 +523,7 @@ def infer(
     max_tta_time: int = 240,
     random_flips: int = 0,
     do_postprocess: bool = True,
-    body_fg_segmentator: bool = True,
+    fake_total_segmentator: bool = True,
     clip_suv: bool = True,
     postprocess_kwargs=None,
     dynamic_ensemble: bool = False,
@@ -524,7 +551,7 @@ def infer(
         save_path,
         verbose=verbose,
         do_postprocess=do_postprocess,
-        body_fg_segmentator=body_fg_segmentator,
+        fake_total_segmentator=fake_total_segmentator,
         clip_suv=clip_suv,
         **postprocess_kwargs,
     )
@@ -546,7 +573,7 @@ if __name__ == "__main__":
                       "weights/last_f1.ckpt",
                       "weights/last_f2.ckpt",
                       "weights/last_f3.ckpt",
-                    #   "weights/last_f4.ckpt"
+                      "weights/last_f4.ckpt"
                       ],
         sw_batch_size=6,
         save_path="../test/expected_output_dc/",
@@ -554,12 +581,12 @@ if __name__ == "__main__":
         tta=True, # set to False for testing purposes
         dynamic_tta=True, 
         max_tta_time=50,
-        random_flips=0,
+        random_flips=5,
         do_postprocess=False,
-        body_fg_segmentator=False,
+        fake_total_segmentator=False,
         clip_suv=True,
         postprocess_kwargs={"min_size": 2, "connectivity": 2, "merge_distance": None, "opening_radius": 0, "closing_radius": 0, "monai_remove_min_size": None, "dilation_radius": 0},
         dynamic_ensemble=True,
-        max_ensemble_time=150,
+        max_ensemble_time=150
     )
     print("Total time main(): ", time.time() - start)

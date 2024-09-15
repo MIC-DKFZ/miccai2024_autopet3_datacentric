@@ -1,5 +1,35 @@
 Copyright German Cancer Research Center (DKFZ) and contributors. Please make sure that your usage of this code is in compliance with its license [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/MIC-DKFZ/miccai2024_autopet3_datacentric/blob/main/LICENSE). 
 
+# Data-centric challenge submission
+
+## Usage
+
+To download our model weights, please run `bash download_final_weights.sh` in the folder [/autoPETIII_datacentric/datacentric-baseline](https://github.com/MIC-DKFZ/miccai2024_autopet3_datacentric/tree/public/autoPETIII_datacentric/datacentric-baseline).
+
+## Citation
+
+This project builds upon and extends the work from the autoPET III Challenge: 
+
+1. **Data-Centric Challenge Repository:**
+This project was initially cloned from [ClinicalDataScience/datacentric-challenge](https://github.com/ClinicalDataScience/datacentric-challenge). We adapted the code and incorporated our modifications within the datacentric subfolder [autopet3/datacentric](autopet3/datacentric) and [autopet3/datacentric/predict.py](autopet3/datacentric/predict.py).
+
+2. **AutoPET Repository:**
+The autoPETIII_datacentric subfolder was cloned from [ClinicalDataScience/autoPETIII](https://github.com/ClinicalDataScience/autoPETIII) and adapted for our the challenge submission.
+
+
+Our work and the modifications to the code are detailed in our forthcoming research paper, which will be available on arXiv once it is publicly released. Please check back for the final link. If you use this code, please cite this paper: 
+
+```
+@article{kovacsxiao2024datacentric,
+  author = {Kovacs, Balint and Xiao, Shuhan and Rokuss, Maximilian and Ulrich, Constantin and Isensee, Fabian and Maier-Hein, Klaus H.},
+  title = {Data-Centric Strategies for Overcoming PET/CT Heterogeneity: Insights from the AutoPET III Lesion Segmentation Challenge.},
+  journal={ArXiv},
+  year={2024},
+  publisher={arXiv}
+}
+```
+
+
 # Introduction
 
 Welcome to the Data-Centric Baseline Model repository for the autoPET III Challenge 2024! This repository provides all the necessary resources for participating in Award Category 2, which emphasizes leveraging data handling to enhance model performance. 
@@ -134,28 +164,9 @@ A preprocessing script can be used to clean the dataset, remove outlier or gener
 The predict function [predict.py](predict.py) integrates a postprocessing function. Test-time augmentation (TTA) was used to improve model performance. In addition, fewer random rotations were used to obtain a faster prediction time. We allow for ensembling even it's not strictly datacentric, but it can be considered best practice in a challenge setup. 
 There are a lot of post calibration techniques, etc, which we did not explicitly forbid. If any of these methods contribute more to the performance than your data methods please be fair and submit your method to award category 1 only.
 
-## Citation
-
-This project builds upon and extends the work from the autoPET III Challenge: 
-
-1. **Data-Centric Challenge Repository:**
-This project was initially cloned from [ClinicalDataScience/datacentric-challenge](https://github.com/ClinicalDataScience/datacentric-challenge). We adapted the code and incorporated our modifications within the datacentric subfolder [autopet3/datacentric](autopet3/datacentric) and [autopet3/datacentric/predict.py](autopet3/datacentric/predict.py).
-
-2. **AutoPET Repository:**
-The autoPETIII_datacentric subfolder was cloned from [ClinicalDataScience/autoPETIII](https://github.com/ClinicalDataScience/autoPETIII) and adapted for our the challenge submission.
 
 
-Our work and the modifications to the code are detailed in our forthcoming research paper, which will be available on arXiv once it is publicly released. Please check back for the final link. If you use this code, please cite this paper: 
 
-```
-@article{kovacsxiao2024datacentric,
-  author = {Kovacs, Balint and Xiao, Shuhan and Rokuss, Maximilian and Ulrich, Constantin and Isensee, Fabian and Maier-Hein, Klaus H.},
-  title = {Data-Centric Strategies for Overcoming PET/CT Heterogeneity: Insights from the AutoPET III Lesion Segmentation Challenge.},
-  journal={ArXiv},
-  year={2024},
-  publisher={arXiv}
-}
-```
 
 
 
