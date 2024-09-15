@@ -1,5 +1,5 @@
 # weights
-weights/
+# weights/
 *.tar.gz
 
 # Byte-compiled / optimized / DLL files
