@@ -16,5 +16,5 @@ __pycache__/
 
 *__pycache__*
 
-#*.ckpt
+*.ckpt
 

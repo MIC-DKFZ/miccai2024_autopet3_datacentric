@@ -4,7 +4,7 @@ Copyright German Cancer Research Center (DKFZ) and contributors. Please make sur
 
 ## Usage
 
-To download our model weights, please run `bash download_final_weights.sh` in the folder [/autoPETIII_datacentric/datacentric-baseline](https://github.com/MIC-DKFZ/miccai2024_autopet3_datacentric/tree/public/autoPETIII_datacentric/datacentric-baseline).
+To download our model weights, please run `bash download_final_weights.sh` in the folder [/autoPETIII_datacentric/datacentric-baseline](https://github.com/MIC-DKFZ/miccai2024_autopet3_datacentric/tree/public/autoPETIII_datacentric/datacentric-baseline), or use directly the [following link](https://hub.dkfz.de/s/R9nDpWCxEwwdDmZ).
 
 ## Citation
 
