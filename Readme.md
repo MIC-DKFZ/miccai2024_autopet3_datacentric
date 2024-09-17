@@ -17,15 +17,18 @@ This project was initially cloned from [ClinicalDataScience/datacentric-challeng
 The autoPETIII_datacentric subfolder was cloned from [ClinicalDataScience/autoPETIII](https://github.com/ClinicalDataScience/autoPETIII) and adapted for our the challenge submission.
 
 
-Our work and the modifications to the code are detailed in our forthcoming research paper, which will be available on arXiv once it is publicly released. Please check back for the final link. If you use this code, please cite this paper: 
+Our work and the modifications to the code are detailed in our paper "[Data-Centric Strategies for Overcoming PET/CT Heterogeneity: Insights from the AutoPET III Lesion Segmentation Challenge](https://arxiv.org/abs/2409.10120)". If you use this code, please cite this paper: 
 
 ```
 @article{kovacsxiao2024datacentric,
-  author = {Kovacs, Balint and Xiao, Shuhan and Rokuss, Maximilian and Ulrich, Constantin and Isensee, Fabian and Maier-Hein, Klaus H.},
-  title = {Data-Centric Strategies for Overcoming PET/CT Heterogeneity: Insights from the AutoPET III Lesion Segmentation Challenge.},
+  author={Kovacs, Balint and Xiao, Shuhan and Rokuss, Maximilian and Ulrich, Constantin and Isensee, Fabian and Maier-Hein, Klaus H.},
+  title={Data-Centric Strategies for Overcoming PET/CT Heterogeneity: Insights from the AutoPET III Lesion Segmentation Challenge},
   journal={ArXiv},
   year={2024},
   publisher={arXiv}
+  eprint={2409.10120},
+  archivePrefix={arXiv},
+  url={https://arxiv.org/abs/2409.10120}, 
 }
 ```
 
