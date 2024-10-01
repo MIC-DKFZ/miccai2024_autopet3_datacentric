@@ -1,4 +1,4 @@
-Copyright German Cancer Research Center (DKFZ) and contributors. Please make sure that your usage of this code is in compliance with its license [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/MIC-DKFZ/miccai2024_autopet3_datacentric/blob/main/LICENSE). 
+Copyright German Cancer Research Center (DKFZ) and contributors. Please make sure that your usage of this code is in compliance with its license [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/MIC-DKFZ/miccai2024_autopet3_datacentric/blob/public/LICENSE). 
 
 # Data-centric challenge submission
 
